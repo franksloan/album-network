@@ -12,13 +12,17 @@ var main = function(){
 
 	server.set('port', (process.env.PORT || 5050 ));
 
-	server.use(express.static(path.join(__dirname, 'public')));
+	server.use(express.static(path.join(__dirname, '../public')));
 	server.use(bodyParser.json());
 	server.use(bodyParser.urlencoded({extended: true}));
 	server.use(webpackMiddleware(compiler));
 	server.get('/', function response(req, res){
 		res.sendFile(path.join(__dirname, 'public/index.html'))
 	})
+
+	server.listen(server.get('port'), function(){
+		console.log('started ' + server.get('port'))
+	});
 
 }
 
